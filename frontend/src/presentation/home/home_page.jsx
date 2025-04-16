@@ -1,62 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import './home.css';
+import Appbar from './widgets/appbar';
 
-const HomePage = () => {
-  const [projects, setProjects] = useState([]);
+const defaultImage = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
+
+export default function HomePage() {
+  const [projectImages, setProjectImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Simulated static data
-    setProjects([
-      { id: 1, title: 'UI Design', imageUrl: '/images/img1.png' },
-      { id: 2, title: 'Cyber Security', imageUrl: '/images/img2.png' },
-      { id: 3, title: 'API Integration', imageUrl: '/images/img3.png' },
-      { id: 4, title: 'Analytics Dashboard', imageUrl: '/images/img4.png' },
-      { id: 5, title: 'Frontend Dev', imageUrl: '/images/img5.png' },
-      { id: 6, title: 'Binary Systems', imageUrl: '/images/img6.png' },
-      { id: 7, title: 'Code Blocks', imageUrl: '/images/img7.png' }
-    ]);
-
-    // Uncomment below when backend is ready
-    // axios.get('/api/projects')
-    //   .then(res => setProjects(res.data))
-    //   .catch(err => console.error(err));
+    setTimeout(() => setIsVisible(true), 100);
+    
+    setTimeout(() => {
+      setProjectImages([
+        'https://placehold.co/600x400/3498db/ffffff?text=Development',
+        'https://placehold.co/600x400/9b59b6/ffffff?text=Security',
+        'https://placehold.co/600x400/2ecc71/ffffff?text=DevOps',
+        'https://placehold.co/600x400/e74c3c/ffffff?text=Analytics',
+        'https://placehold.co/600x400/f39c12/ffffff?text=UI/UX',
+        'https://placehold.co/600x400/1abc9c/ffffff?text=Cloud',
+      ]);
+      setLoading(false);
+    }, 1000);
   }, []);
 
   return (
-    <div className="landing-container">
-      <header className="header">
-        <div className="logo">Softlynk</div>
-        <nav className="nav">
-          <a href="#">Home</a>
-          <a href="#">Projects</a>
-          <a href="#">Services</a>
-        </nav>
-      </header>
-
-      <section className="hero-section">
-        <div className="hero-text">
-          <h2>Your Smart Link to Seamless Tech Solutions</h2>
-          <p>At Softlynk, we simplify the complex... tailored to your needs.</p>
-          <button>Learn More</button>
-        </div>
-        <img src="/images/hero-main.png" alt="Hero Graphic" className="hero-image" />
-      </section>
-
-      <section className="projects-section">
-        <h3>1440 x 738</h3>
-        <div className="projects-grid">
-          {projects.map(project => (
-            <div key={project.id} className="project-card">
-              <img src={project.imageUrl} alt={project.title} />
-              <p>{project.title}</p>
+    <div className={`homepage ${isVisible ? 'visible' : ''}`}>
+      <Appbar />
+      
+      <section className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <div className="hero-text">
+              <h1>Your Smart Link to Seamless Tech Solutions</h1>
+              <div className="hero-divider"></div>
+              <p className="hero-lead">
+                At Softlynk, we simplify the complex. Whether you're looking for on-demand IT support,
+                software solutions, or system optimization — we've got you covered.
+              </p>
+              <p>
+                Our platform connects individuals and businesses with expert tech services that are
+                reliable, fast, and tailored to your needs.
+              </p>
+              <p className="tagline">Efficient. Scalable. Secure.</p>
+              <div className="button-group">
+                <button className="btn primary-btn">Get Started</button>
+                <button className="btn secondary-btn">Learn More</button>
+              </div>
             </div>
-          ))}
+            <div className="hero-img">
+              <div className="image-container">
+                <img src={defaultImage} alt="Tech Solutions" />
+              </div>
+            </div>
+          </div>
         </div>
-        <button className="see-all">See All</button>
+      </section>
+      
+      <section className="projects-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Featured Projects</h2>
+        
+          </div>
+          
+          {loading ? (
+            <div className="loading-container">
+              <div className="loader"></div>
+              <p>Loading amazing projects...</p>
+            </div>
+          ) : (
+            <div className="project-grid">
+              {projectImages.map((img, index) => (
+                <div 
+                  className="project-card" 
+                  key={index}
+                  style={{animationDelay: `${index * 0.1}s`}}
+                >
+                  <div className="card-image">
+                    <img src={img} alt={`Project ${index + 1}`} />
+                  </div>
+                  <div className="card-overlay">
+                    <h3>Project {index + 1}</h3>
+                    <p>Innovative solution for modern challenges</p>
+                    <button className="view-project-btn">View Details</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          <div className="projects-cta">
+            <button className="btn outline-btn">See All Projects</button>
+          </div>
+        </div>
       </section>
     </div>
   );
-};
-
-export default HomePage;
+}
