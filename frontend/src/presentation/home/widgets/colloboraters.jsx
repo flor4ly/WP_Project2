@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/.css';
+import './styles/colloboraters.css';
 
 const collaborators = [
   { name: "Instagram", icon: "instagram", color: "#E1306C" },
