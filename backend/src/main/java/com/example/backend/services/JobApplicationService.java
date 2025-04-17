@@ -1,17 +1,17 @@
 package com.example.backend.services;
 
-import com.example.backend.repositories.JobsRepository;
 import com.example.backend.entities.JobApplication;
 import com.example.backend.entities.Jobs;
 import com.example.backend.repositories.JobApplicationRepository;
+import com.example.backend.repositories.JobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.List;
 import java.util.UUID;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class JobApplicationService {
@@ -44,5 +44,9 @@ public class JobApplicationService {
         application.setJobs(job);
 
         return jobApplicationRepository.save(application);
+    }
+    // the fixed part
+    public List<JobApplication> getAllApplications() {
+        return jobApplicationRepository.findAll();
     }
 }
