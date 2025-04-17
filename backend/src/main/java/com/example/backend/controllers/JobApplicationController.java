@@ -1,39 +1,42 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.ApiResponse;
+import com.example.backend.entities.JobApplication;
 import com.example.backend.services.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobs")
+@RequestMapping("/api/job-applications")
+@CrossOrigin(origins = "*")
 public class JobApplicationController {
 
-    private final JobApplicationService jobApplicationService;
-
     @Autowired
-    public JobApplicationController(JobApplicationService jobApplicationService) {
-        this.jobApplicationService = jobApplicationService;
-    }
+    private JobApplicationService jobApplicationService;
 
-    @PostMapping("/apply")
-    public ResponseEntity<ApiResponse> apply(
+    @PostMapping
+    public ResponseEntity<?> applyForJob(
             @RequestParam("name") String name,
             @RequestParam("phone") String phone,
             @RequestParam("resume") MultipartFile resume,
             @RequestParam("jobId") Long jobId
     ) {
         try {
-            jobApplicationService.applyForJob(name, phone, resume, jobId);
-            return ResponseEntity.ok(new ApiResponse("Application submitted successfully", true));
+            JobApplication application = jobApplicationService.applyForJob(name, phone, resume, jobId);
+            return ResponseEntity.ok(application);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse("Resume upload failed: " + e.getMessage(), false));
+            return ResponseEntity.status(500).body("Failed to save resume: " + e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<JobApplication>> getAllApplications() {
+        return ResponseEntity.ok().body(jobApplicationService.getAllApplications());
     }
 }
