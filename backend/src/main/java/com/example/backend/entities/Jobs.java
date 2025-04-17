@@ -1,10 +1,8 @@
 package com.example.backend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 
 @Entity
@@ -25,4 +23,7 @@ public class Jobs {
     private String reqs;
     private String skills;
     private String conditions;
+
+    @OneToMany(mappedBy = "jobs")
+    private List<JobApplication> jobApplications;
 }

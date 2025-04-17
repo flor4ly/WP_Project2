@@ -15,7 +15,7 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping //to get all comps
+    @GetMapping
     public ResponseEntity<List<Company>> getAllCompanies() {
         return ResponseEntity.ok(companyService.getAllCompanies());
     }
