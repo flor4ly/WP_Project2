@@ -1,5 +1,6 @@
 package com.example.backend.services;
 
+import com.example.backend.dto.CompanyDTO;
 import com.example.backend.entities.Company;
 import com.example.backend.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class CompanyService {
 
@@ -49,5 +49,36 @@ public class CompanyService {
             return true;
         }
         return false;
+    }
+
+    // ✅ Mapping methods:
+    public CompanyDTO mapToDTO(Company company) {
+        return new CompanyDTO(
+                company.getId(),
+                company.getTitle(),
+                company.getDescription(),
+                company.getImg_urls(),
+                company.getNum_projects(),
+                company.getNum_members(),
+                company.getNum_reviews(),
+                company.getNum_awards(),
+                company.getOur_vision(),
+                company.getOur_mission()
+        );
+    }
+
+    public Company mapToEntity(CompanyDTO dto) {
+        Company company = new Company();
+        company.setId(dto.getId());
+        company.setTitle(dto.getTitle());
+        company.setDescription(dto.getDescription());
+        company.setImg_urls(dto.getImg_urls());
+        company.setNum_projects(dto.getNum_projects());
+        company.setNum_members(dto.getNum_members());
+        company.setNum_reviews(dto.getNum_reviews());
+        company.setNum_awards(dto.getNum_awards());
+        company.setOur_vision(dto.getOur_vision());
+        company.setOur_mission(dto.getOur_mission());
+        return company;
     }
 }
