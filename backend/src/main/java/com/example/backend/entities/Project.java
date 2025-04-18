@@ -22,22 +22,6 @@ public class Project {
     private String logo;
     private String link_to_website;
 
-    @ManyToMany
-    @JoinTable(
-            name = "project_services",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id")
-    )
-    private Set<Services> services = new HashSet<>();
-
-    public void addService(Services service) {
-        this.services.add(service);
-        service.getProjects().add(this);
-    }
-
-    public void removeService(Services service) {
-        this.services.remove(service);
-        service.getProjects().remove(this);
-    }
-
+    @ManyToOne
+    private Services services;
 }
