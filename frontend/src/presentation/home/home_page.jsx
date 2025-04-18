@@ -1,11 +1,11 @@
 // HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import './home.css';
-import Appbar from './widgets/appbar';
+
 import ServicesSection from './widgets/service_section';
 import CollaboratorsSection from './widgets/colloboraters';
 import TestimonialsSection from './widgets/user_feedback';
-import Footer from './widgets/footer';
+
 
 
 const defaultImage = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
@@ -16,7 +16,6 @@ export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Make components visible after mount for animations
     setTimeout(() => setIsVisible(true), 100);
     
     // Simulate fetch with better project images
@@ -35,7 +34,7 @@ export default function HomePage() {
 
   return (
     <div className={`homepage ${isVisible ? 'visible' : ''}`}>
-      <Appbar />
+  
       
       <section className="hero">
         <div className="container">
@@ -74,7 +73,6 @@ export default function HomePage() {
             <h2>Featured Projects</h2>
             <p>Explore our latest innovations and success stories</p>
           </div>
-          
           {loading ? (
             <div className="loading-container">
               <div className="loader"></div>
@@ -106,11 +104,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
+
       <CollaboratorsSection />
 
       <TestimonialsSection />
-      <Footer />
+  
     </div>
   );
 }
