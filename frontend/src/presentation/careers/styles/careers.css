@@ -1,6 +1,5 @@
 .careers-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0f3b46;
   min-height: 100vh;
 }
 
@@ -33,12 +32,14 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: black;
 }
 
 .job-card hr {
   margin: 0.5rem 0 1rem 0;
   border: none;
   border-top: 1px solid #ccc;
+  color: black;
 }
 
 .job-card p {
@@ -47,4 +48,5 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: black;
 }

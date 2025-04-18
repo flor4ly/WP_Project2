@@ -12,7 +12,7 @@ const jobList = new Array(9).fill({
 const Careers = () => {
   return (
     <div className="careers-container">
-      <Appbar/>
+
       <header className="header">
         <h1>CAREERS</h1>
       </header>
@@ -27,7 +27,7 @@ const Careers = () => {
           </div>
         ))}
       </section>
-      <Footer/>
+    
     </div>
   );
 };
