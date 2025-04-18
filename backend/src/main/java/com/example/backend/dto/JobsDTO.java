@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JobsDTO {
-    private int id; // Matches the primary key from the Jobs entity
+    private int id;
     private String title;
     private String time;
     private String money;
