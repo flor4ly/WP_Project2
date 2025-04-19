@@ -29,6 +29,7 @@ export default function HomePage() {
         'https://placehold.co/600x400/1abc9c/ffffff?text=Cloud',
       ]);
       setLoading(false);
+      
     }, 1000);
   }, []);
 
@@ -84,7 +85,7 @@ export default function HomePage() {
                 <div 
                   className="project-card" 
                   key={index}
-                  style={{animationDelay: `${index * 0.1}s`}}
+                  style={{opacity: 1, transform: 'translateY(0)'}}
                 >
                   <div className="card-image">
                     <img src={img} alt={`Project ${index + 1}`} />
