@@ -32,20 +32,58 @@ Handles all company-related endpoints including creation, fetching, updating, an
 
 ---
 
-### `JobApplicationController`
+## JobApplicationController
 
-#### **POST /api/job-applications/apply**
-Applies for a job.
-- **Request Params:**
-    - `name`: String
-    - `phone`: String
-    - `resume`: MultipartFile (uploaded file)
-    - `jobId`: Long
-- **Response:** Created `JobApplicationDTO`
+**Base URL:** `/api/job-applications`
 
-#### **GET /api/job-applications**
-Returns a list of all job applications.
-- **Response:** `List<JobApplicationDTO>`
+Handles operations related to job applications.
+
+### Endpoints:
+
+- `POST /api/job-applications/apply`  
+  Apply for a job.  
+  **Request Params:**
+  - `name`: String
+  - `phone`: String
+  - `resume`: MultipartFile (uploaded file)
+  - `jobId`: Long  
+    **Response:** Created `JobApplicationDTO`
+
+- `GET /api/job-applications`  
+  Fetch all job applications.  
+  **Returns:** List of `JobApplicationDTO`
+
+---
+
+## JobsController
+
+**Base URL:** `/api/jobs`
+
+Handles operations related to jobs, including creation, fetching, updating, and deleting job data.
+
+### Endpoints:
+
+- `GET /api/jobs`  
+  Fetch all jobs.  
+  **Returns:** List of `JobsDTO`
+
+- `GET /api/jobs/{id}`  
+  Fetch a single job by ID.  
+  **Returns:** `JobsDTO` if found, otherwise 404 Not Found
+
+- `POST /api/jobs`  
+  Create a new job.  
+  **Body:** `JobsDTO`  
+  **Returns:** Created `JobsDTO`
+
+- `PUT /api/jobs/{id}`  
+  Update an existing job by ID.  
+  **Body:** `JobsDTO`  
+  **Returns:** Updated `JobsDTO` if found, otherwise 404 Not Found
+
+- `DELETE /api/jobs/{id}`  
+  Delete a job by ID.  
+  **Returns:** JSON message with success flag
 
 ---
 
