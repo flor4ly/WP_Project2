@@ -1,51 +1,92 @@
 package com.example.backend.services;
 
+import com.example.backend.dto.JobsDTO;
+import com.example.backend.dto.JobsDetailDTO;
 import com.example.backend.entities.Jobs;
 import com.example.backend.repositories.JobsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobsService {
+    private final JobsRepository jobsRepository;
 
-    @Autowired
-    private JobsRepository jobsRepository;
-
-    public List<Jobs> getAllJobs() {
-        return jobsRepository.findAll();
+    public JobsService(JobsRepository jobsRepository) {
+        this.jobsRepository = jobsRepository;
     }
 
-    public Optional<Jobs> getJobById(int id) {
-        return jobsRepository.findById(id);
+    public List<JobsDTO> getAllJobsForListing() {
+        return jobsRepository.findAll().stream()
+                .map(this::convertToJobsDTO)
+                .toList();
     }
 
-    public Jobs createJob(Jobs job) {
-        return jobsRepository.save(job);
+    public List<JobsDetailDTO> getAllJobsForDetail() {
+        return jobsRepository.findAll().stream()
+                .map(this::convertToJobsDetailDTO)
+                .toList();
     }
 
-    public Jobs updateJob(int id, Jobs updatedJob) {
+    public JobsDetailDTO getJobDetailById(Long id) {
         return jobsRepository.findById(id)
-                .map(job -> {
-                    job.setTitle(updatedJob.getTitle());
-                    job.setTime(updatedJob.getTime());
-                    job.setMoney(updatedJob.getMoney());
-                    job.setStack(updatedJob.getStack());
-                    job.setReqs(updatedJob.getReqs());
-                    job.setSkills(updatedJob.getSkills());
-                    job.setConditions(updatedJob.getConditions());
-                    return jobsRepository.save(job);
-                })
-                .orElse(null);
+                .map(this::convertToJobsDetailDTO)
+                .orElseThrow(() -> new RuntimeException("Job not found with id: " + id));
     }
 
-    public boolean deleteJob(int id) {
-        if (jobsRepository.existsById(id)) {
-            jobsRepository.deleteById(id);
-            return true;
+    public JobsDTO createJobListing(JobsDTO jobsDTO) {
+        Jobs job = new Jobs();
+        job.setTitle(jobsDTO.getTitle());
+        job.setTime(jobsDTO.getTime());
+        job.setMoney(jobsDTO.getMoney());
+        job.setStack(jobsDTO.getStack());
+
+        Jobs savedJob = jobsRepository.save(job);
+        return convertToJobsDTO(savedJob);
+    }
+
+    public JobsDetailDTO createJobDetail(JobsDetailDTO jobsDetailDTO) {
+        Jobs job = new Jobs();
+        job.setTitle(jobsDetailDTO.getTitle());
+        job.setReqs(jobsDetailDTO.getReqs());
+        job.setSkills(jobsDetailDTO.getSkills());
+        job.setConditions(jobsDetailDTO.getConditions());
+
+        Jobs savedJob = jobsRepository.save(job);
+        return convertToJobsDetailDTO(savedJob);
+    }
+
+    public void deleteJobListing(Long id) {
+        if (!jobsRepository.existsById(id)) {
+            throw new RuntimeException("Job not found with id: " + id);
         }
-        return false;
+        jobsRepository.deleteById(id);
+    }
+
+    public void deleteJobDetail(Long id) {
+        if (!jobsRepository.existsById(id)) {
+            throw new RuntimeException("Job not found with id: " + id);
+        }
+        jobsRepository.deleteById(id);
+    }
+
+    private JobsDTO convertToJobsDTO(Jobs job) {
+        return new JobsDTO(
+                job.getId(),
+                job.getTitle(),
+                job.getTime(),
+                job.getMoney(),
+                job.getStack()
+        );
+    }
+
+    private JobsDetailDTO convertToJobsDetailDTO(Jobs job) {
+        return new JobsDetailDTO(
+                job.getId(),
+                job.getTitle(),
+                job.getReqs(),
+                job.getSkills(),
+                job.getConditions()
+        );
     }
 }
