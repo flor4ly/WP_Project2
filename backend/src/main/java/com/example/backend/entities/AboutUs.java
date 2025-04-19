@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Company {
+public class AboutUs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

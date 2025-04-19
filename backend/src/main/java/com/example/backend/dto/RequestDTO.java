@@ -13,8 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestDTO {
-
-
         @NotBlank(message = "Company name is required")
         @Size(max = 100, message = "Company name must not exceed 100 characters")
         private String companyName;

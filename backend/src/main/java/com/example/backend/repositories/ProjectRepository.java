@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByServicesId(Long servicesId);
-
 }
