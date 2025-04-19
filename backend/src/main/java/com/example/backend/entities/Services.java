@@ -19,6 +19,6 @@ public class Services {
     private String title;
     private String description;
 
-    @OneToMany (mappedBy = "Services")
-    private List<Services> services;
+    @OneToMany (mappedBy = "services")
+    private List<Project> projects;
 }
