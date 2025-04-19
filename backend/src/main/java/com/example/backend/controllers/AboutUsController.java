@@ -1,6 +1,6 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.CompanyDTO;
+import com.example.backend.dto.AboutUsDTO;
 import com.example.backend.entities.Company;
 import com.example.backend.services.CompanyService;
 import com.example.backend.dto.ApiResponse;
@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/companies")
 @CrossOrigin(origins = "*")
-public class CompanyController {
+public class AboutUsController {
 
     @Autowired
     private CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<CompanyDTO>> getAllCompanies() {
-        List<CompanyDTO> companies = companyService.getAllCompanies()
+    public ResponseEntity<List<AboutUsDTO>> getAllCompanies() {
+        List<AboutUsDTO> companies = companyService.getAllCompanies()
                 .stream()
                 .map(companyService::mapToDTO)
                 .collect(Collectors.toList());
@@ -30,21 +30,21 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable Long id) {
+    public ResponseEntity<AboutUsDTO> getCompanyById(@PathVariable Long id) {
         Optional<Company> companyOpt = companyService.getCompanyById(id);
         return companyOpt.map(company -> ResponseEntity.ok(companyService.mapToDTO(company)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<CompanyDTO> createCompany(@RequestBody CompanyDTO companyDTO) {
-        Company created = companyService.createCompany(companyService.mapToEntity(companyDTO));
+    public ResponseEntity<AboutUsDTO> createCompany(@RequestBody AboutUsDTO aboutUsDTO) {
+        Company created = companyService.createCompany(companyService.mapToEntity(aboutUsDTO));
         return ResponseEntity.ok(companyService.mapToDTO(created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CompanyDTO> updateCompany(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
-        Company updated = companyService.updateCompany(id, companyService.mapToEntity(companyDTO));
+    public ResponseEntity<AboutUsDTO> updateCompany(@PathVariable Long id, @RequestBody AboutUsDTO aboutUsDTO) {
+        Company updated = companyService.updateCompany(id, companyService.mapToEntity(aboutUsDTO));
         if (updated != null) {
             return ResponseEntity.ok(companyService.mapToDTO(updated));
         } else {

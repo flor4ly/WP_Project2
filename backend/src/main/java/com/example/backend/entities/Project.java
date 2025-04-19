@@ -3,7 +3,9 @@ package com.example.backend.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,4 +26,8 @@ public class Project {
 
     @ManyToOne
     private Services services;
+
+    public List<String> getImageUrlList() {
+        return Arrays.asList(this.img_urls.split(","));
+    }
 }

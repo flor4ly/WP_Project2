@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyDTO {
+public class AboutUsDTO {
     private Long id;
     private String title;
     private String description;
