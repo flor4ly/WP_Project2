@@ -14,7 +14,10 @@ const jobList = new Array(9).fill({
 const Careers = () => {
   return (
     <div className="careers-container">
-      <Appbar/>
+
+      <header className="header">
+        <h1>CAREERS</h1>
+      </header>
       <section className="cards-section">
         {jobList.map((job, index) => (
           <Link to="/career-details" key={index} className="job-card-link">
@@ -27,8 +30,7 @@ const Careers = () => {
           </Link>
         ))}
       </section>
-
-      <Footer/>
+    
     </div>
   );
 };

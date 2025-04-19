@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,6 @@ public class Services {
     private String title;
     private String description;
 
-    @ManyToMany(mappedBy = "services")
-    private Set<Project> projects = new HashSet<>();
-
+    @OneToMany (mappedBy = "Services")
+    private List<Services> services;
 }

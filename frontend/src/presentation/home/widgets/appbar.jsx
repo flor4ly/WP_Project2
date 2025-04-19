@@ -1,14 +1,13 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 import './styles/app_bar.css';
-
 export default function Appbar() {
   return (
     <header className="navbar">
       <div className="logo">Softlynk</div>
       <nav>
-        <a href="#">Home</a>
-        <a href="#">Projects</a>
-        <a href="#">Services</a>
+        <Link to="/">Home</Link>
+        <Link to="/projects">Projects</Link>
+        <Link to="/services">Services</Link>
       </nav>
       <div className="lang-switch">🌐 EN</div>
     </header>

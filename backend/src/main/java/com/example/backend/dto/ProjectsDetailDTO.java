@@ -1,19 +1,13 @@
-package com.example.backend.entities;
+package com.example.backend.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProjectsDetailDTO {
+
     private Long id;
     private String title;
     private String thumbnail;
@@ -22,6 +16,4 @@ public class Project {
     private String logo;
     private String link_to_website;
 
-    @ManyToOne
-    private Services services;
 }
