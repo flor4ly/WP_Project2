@@ -54,13 +54,5 @@ public class ServicesDetailService {
         );
     }
 
-    private HomeProjectsDTO mapProjectToDto(Project project) {
-        return new HomeProjectsDTO(
-                project.getId(),
-                project.getTitle(),
-                project.getThumbnail(),
-                project.getDescription(),
-                project.getServices() != null ? project.getServices().getId() : null
-        );
-    }
+
 }
