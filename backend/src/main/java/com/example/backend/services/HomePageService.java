@@ -33,7 +33,8 @@ public class HomePageService {
                         project.getId(),
                         project.getTitle(),
                         project.getThumbnail(),
-                        project.getDescription()
+                        project.getDescription(),
+                        project.getServices().getId()
                 ))
                 .collect(Collectors.toList());
 

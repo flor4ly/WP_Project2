@@ -39,7 +39,7 @@ public class JobApplicationService {
         application.setApplicantPhone(phone);
         application.setResumePath(filePath.toString());
 
-        Jobs job = jobsRepository.findById(jobId.intValue())
+        Jobs job = jobsRepository.findById(jobId)
                 .orElseThrow(() -> new RuntimeException("Job not found with id: " + jobId));
         application.setJobs(job);
 

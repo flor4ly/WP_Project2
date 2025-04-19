@@ -1,22 +1,17 @@
 package com.example.backend.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HomeProjectsDTO {
     private Long id;
     private String title;
     private String thumbnail;
     private String description;
+    private Long servicesId;
 
-    public HomeProjectsDTO() {}
-
-    public HomeProjectsDTO(Long id, String title, String thumbnail, String description) {
-        this.id = id;
-        this.title = title;
-        this.thumbnail = thumbnail;
-        this.description = description;
-    }
 }
