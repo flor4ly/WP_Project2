@@ -4,7 +4,7 @@ import com.example.backend.dto.HomeProjectsDTO;
 import com.example.backend.entities.Project;
 import com.example.backend.entities.Services;
 import com.example.backend.repositories.ProjectRepository;
-import com.example.backend.repositories.ServiceRepository;
+import com.example.backend.repositories.ServicesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 public class HomeProjectService {
 
     private final ProjectRepository projectRepository;
-    private final ServiceRepository serviceRepository;
+    private final ServicesRepository servicesRepository;
 
     @Transactional
     public HomeProjectsDTO createProject(HomeProjectsDTO projectDTO) {
@@ -58,7 +58,7 @@ public class HomeProjectService {
         project.setDescription(dto.getDescription());
 
         if (dto.getServicesId() != null) {
-            Services service = serviceRepository.findById(dto.getServicesId())
+            Services service = servicesRepository.findById(dto.getServicesId())
                     .orElseThrow(() -> new RuntimeException("Service not found with id: " + dto.getServicesId()));
             project.setServices(service);
         }

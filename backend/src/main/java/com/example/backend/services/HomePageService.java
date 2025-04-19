@@ -6,7 +6,7 @@ import com.example.backend.dto.HomeProjectsDTO;
 import com.example.backend.dto.ServicesDTO;
 import com.example.backend.repositories.JobsRepository;
 import com.example.backend.repositories.ProjectRepository;
-import com.example.backend.repositories.ServiceRepository;
+import com.example.backend.repositories.ServicesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +17,11 @@ public class HomePageService {
 
     private final ProjectRepository projectsRepository;
     private final JobsRepository jobsRepository;
-    private final ServiceRepository servicesRepository;
+    private final ServicesRepository servicesRepository;
 
     public HomePageService(ProjectRepository projectsRepository,
                            JobsRepository jobsRepository,
-                           ServiceRepository servicesRepository) {
+                           ServicesRepository servicesRepository) {
         this.projectsRepository = projectsRepository;
         this.jobsRepository = jobsRepository;
         this.servicesRepository = servicesRepository;
