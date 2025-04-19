@@ -13,21 +13,23 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RequestService {
+
     private final RequestRepository requestRepo;
     private final ServicesRepository serviceRepo;
 
     @Transactional
-    public void createRequest(RequestDTO dto) {
-        Services service = serviceRepo.findById(dto.getServiceId())
-                .orElseThrow(() -> new RuntimeException("Service not found"));
+    public void createRequest(String companyName, String name, String number, String description, Long serviceId) {
+        Services service = serviceRepo.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service not found with id: " + serviceId));
 
         Request request = new Request();
-        request.setCompanyName(dto.getCompanyName());
-        request.setName(dto.getName());
-        request.setNumber(dto.getNumber());
-        request.setDescription(dto.getDescription());
+        request.setCompanyName(companyName);
+        request.setName(name);
+        request.setNumber(number);
+        request.setDescription(description);
         request.setServices(service);
 
         requestRepo.save(request);
     }
 }
+
