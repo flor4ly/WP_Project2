@@ -1,34 +1,35 @@
-# Backend Controllers
+# Controllers Documentation
 
-This directory contains all the controllers that define the REST API endpoints for interacting with backend entities.
+## CompanyController
+
+**Base URL:** `/api/companies`
+
+Handles all company-related endpoints including creation, fetching, updating, and deleting company data.
+
+### Endpoints:
+
+- `GET /api/companies`  
+  Fetch all companies.  
+  **Returns:** List of `CompanyDTO`
+
+- `GET /api/companies/{id}`  
+  Fetch a single company by ID.  
+  **Returns:** `CompanyDTO` if found, otherwise 404 Not Found
+
+- `POST /api/companies`  
+  Create a new company.  
+  **Body:** `CompanyDTO`  
+  **Returns:** Created `CompanyDTO`
+
+- `PUT /api/companies/{id}`  
+  Update an existing company by ID.  
+  **Body:** `CompanyDTO`  
+  **Returns:** Updated `CompanyDTO` if found, otherwise 404 Not Found
+
+- `DELETE /api/companies/{id}`  
+  Delete a company by ID.  
+  **Returns:** JSON message using `ApiResponse` with success flag
 
 ---
 
-## 1. CompanyController
-
-- **Base URL**: `/api/companies`
-- **Endpoints**:
-    - `GET /api/companies` – Get all companies
-    - `POST /api/companies` – Create a new company
-    - `PUT /api/companies/{id}` – Update a company by ID
-    - `DELETE /api/companies/{id}` – Delete a company by ID
-
----
-
-## 2. JobApplicationController
-
-- **Base URL**: `/api/job-applications`
-- **Endpoints**:
-    - `POST /api/job-applications/apply` – Submit a job application
-        - **Request Params (Form-Data)**:
-            - `name`: `String`
-            - `phone`: `String`
-            - `resume`: `MultipartFile (.pdf/.docx)`
-            - `jobId`: `Long`
-    - `GET /api/job-applications` – Get all job applications
-
----
-
-Each controller delegates to its respective service to handle business logic.
-
-Make sure your backend is connected to a running PostgreSQL instance for data persistence, and that file upload directories (e.g., `resumes/`) are writable and properly created during runtime.
+More controller info will be added as we implement them.
