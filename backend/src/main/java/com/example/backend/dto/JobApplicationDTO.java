@@ -9,9 +9,8 @@ public class JobApplicationDTO {
     private Long id; // Primary key
     private String applicantName;
     private String applicantPhone;
-    private String resumePath; // Path to the uploaded resume
-    private Long jobId; // Reference to the associated job
-
+    private String resumePath;
+    private Long jobId;
     public JobApplicationDTO() {}
 
     public JobApplicationDTO(Long id, String applicantName, String applicantPhone,

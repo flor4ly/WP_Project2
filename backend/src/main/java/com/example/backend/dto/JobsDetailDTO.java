@@ -9,11 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobsDTO {
+public class JobsDetailDTO {
     private int id;
     private String title;
-    private String time;
-    private String money;
-    private String stack;
-
+    private String reqs;
+    private String skills;
+    private String conditions;
 }

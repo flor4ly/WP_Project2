@@ -24,15 +24,7 @@ public class ProjectService {
     }
 
 
-    public Project addServiceToProject(Long projectId, Long serviceId) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
-        Services service = serviceRepository.findById(serviceId)
-                .orElseThrow(() -> new RuntimeException("Service not found"));
 
-        project.addService(service);
-        return projectRepository.save(project);
-    }
 
     public List<Project> getAllProjects() {
         return projectRepository.findAll();

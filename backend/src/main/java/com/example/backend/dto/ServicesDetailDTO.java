@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobsDTO {
-    private int id;
-    private String title;
-    private String time;
-    private String money;
-    private String stack;
+public class ServicesDetailDTO {
+    private List<ServicesDTO> featuredServices;
+    private List<HomeProjectsDTO> featuredProjects;
 
 }
