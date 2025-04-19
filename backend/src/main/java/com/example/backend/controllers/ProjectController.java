@@ -3,7 +3,6 @@ package com.example.backend.controllers;
 import com.example.backend.dto.ProjectsDetailDTO;
 import com.example.backend.entities.Project;
 import com.example.backend.services.ProjectService;
-import com.example.backend.dto.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
