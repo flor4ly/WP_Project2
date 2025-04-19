@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 import Appbar from "../home/widgets/appbar";
 import Footer from "../home/widgets/footer";
 
-const jobList = new Array(9).fill({
+export const jobList = new Array(9).fill({
   title: "Middle Frontend Developer",
   time: "09:00 - 17:00",
   salary: "10 000 000 - 15 000 000",
   skills: "React + REST API + Tailwind CSS",
 });
-
 const Careers = () => {
   return (
     <div className="careers-container">
