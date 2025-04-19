@@ -28,7 +28,7 @@ public class HomePageService {
     }
 
     public HomeDTO getHomepageData() {
-        List<HomeProjectsDTO> projectDTOs = projectsRepository.findAll().stream()
+        List<HomeProjectsDTO> projectDTOs = projectsRepository.findTop7ByOrderByIdDesc().stream()
                 .map(project -> new HomeProjectsDTO(
                         project.getId(),
                         project.getTitle(),
@@ -38,14 +38,14 @@ public class HomePageService {
                 ))
                 .collect(Collectors.toList());
 
-        List<HomeJobsDTO> jobDTOs = jobsRepository.findAll().stream()
+        List<HomeJobsDTO> jobDTOs = jobsRepository.findTop3ByOrderByIdDesc().stream()
                 .map(job -> new HomeJobsDTO(
                         job.getId(),
                         job.getTitle()
                 ))
                 .collect(Collectors.toList());
 
-        List<ServicesDTO> serviceDTOs = servicesRepository.findAll().stream()
+        List<ServicesDTO> serviceDTOs = servicesRepository.findTop4ByOrderByIdDesc().stream()
                 .map(service -> new ServicesDTO(
                         service.getId(),
                         service.getTitle(),

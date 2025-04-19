@@ -18,7 +18,7 @@ public class Project {
     private String title;
     private String thumbnail;
     private String description;
-    private String img_urls;
+    private String img_urls = "";
     private String logo;
     private String link_to_website;
 
