@@ -87,4 +87,27 @@ Handles operations related to jobs, including creation, fetching, updating, and 
 
 ---
 
+## ProjectController
+
+**Base URL:** `/api/projects`
+
+Handles all project-related operations such as creating and fetching project information.
+
+### Endpoints:
+
+- `GET /api/projects`  
+  Fetch all projects.  
+  **Returns:** List of `ProjectsDetailDTO`
+
+- `GET /api/projects/{id}`  
+  Fetch a specific project by ID.  
+  **Returns:** `ProjectsDetailDTO` if found, otherwise 404 Not Found
+
+- `POST /api/projects`  
+  Create a new project.  
+  **Body:** `ProjectsDetailDTO`  
+  **Returns:** Created `ProjectsDetailDTO`
+
+---
+
 More controller info will be added as we implement them.
