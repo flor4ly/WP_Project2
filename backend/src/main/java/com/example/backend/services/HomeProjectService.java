@@ -37,11 +37,6 @@ public class HomeProjectService {
         return mapEntityToDto(project);
     }
 
-    public List<HomeProjectsDTO> getProjectsByServiceId(Long serviceId) {
-        return projectRepository.findByServicesId(serviceId).stream()
-                .map(this::mapEntityToDto)
-                .toList();
-    }
 
     @Transactional
     public void deleteProject(Long id) {
