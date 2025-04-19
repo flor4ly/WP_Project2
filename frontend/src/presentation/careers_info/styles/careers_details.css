@@ -1,0 +1,60 @@
+.career-details-container {
+    background-color: #0f3b46;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 3rem 4rem;
+    min-height: 100vh;
+  }
+  
+  .career-details-container h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .career-details-container hr {
+    border: none;
+    border-top: 1px solid #4c7d8c;
+    margin-bottom: 2rem;
+  }
+  
+  .career-details-container h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #e0f7fa;
+  }
+  
+  .career-details-container ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  .resume-button {
+    background-color: #53bbd5;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    margin-top: 2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .resume-button:hover {
+    background-color: #3aa4bb;
+  }
+  .details-content ul {
+    padding-left: 1.5rem; /* add some padding so the dots don’t touch the border */
+    margin-left: 0;
+    list-style-position: outside;
+    text-align: left;
+  }
+  
+  .details-content li {
+    margin-bottom: 0.5rem;
+  }
+  

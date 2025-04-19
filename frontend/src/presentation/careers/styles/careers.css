@@ -48,3 +48,8 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.job-card-link {
+  text-decoration: none;
+  color: inherit;
+}
