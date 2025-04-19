@@ -32,4 +32,21 @@ Handles all company-related endpoints including creation, fetching, updating, an
 
 ---
 
+### `JobApplicationController`
+
+#### **POST /api/job-applications/apply**
+Applies for a job.
+- **Request Params:**
+    - `name`: String
+    - `phone`: String
+    - `resume`: MultipartFile (uploaded file)
+    - `jobId`: Long
+- **Response:** Created `JobApplicationDTO`
+
+#### **GET /api/job-applications**
+Returns a list of all job applications.
+- **Response:** `List<JobApplicationDTO>`
+
+---
+
 More controller info will be added as we implement them.
