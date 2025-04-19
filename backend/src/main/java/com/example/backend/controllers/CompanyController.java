@@ -1,51 +1,64 @@
 package com.example.backend.controllers;
 
+import com.example.backend.dto.CompanyDTO;
 import com.example.backend.entities.Company;
 import com.example.backend.services.CompanyService;
+import com.example.backend.dto.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/companies")
+@CrossOrigin(origins = "*")
 public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
 
     @GetMapping
-    public ResponseEntity<List<Company>> getAllCompanies() {
-        return ResponseEntity.ok(companyService.getAllCompanies());
+    public ResponseEntity<List<CompanyDTO>> getAllCompanies() {
+        List<CompanyDTO> companies = companyService.getAllCompanies()
+                .stream()
+                .map(companyService::mapToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(companies);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
-        return companyService.getCompanyById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable Long id) {
+        Optional<Company> companyOpt = companyService.getCompanyById(id);
+        return companyOpt.map(company -> ResponseEntity.ok(companyService.mapToDTO(company)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
-        return ResponseEntity.ok(companyService.createCompany(company));
+    public ResponseEntity<CompanyDTO> createCompany(@RequestBody CompanyDTO companyDTO) {
+        Company created = companyService.createCompany(companyService.mapToEntity(companyDTO));
+        return ResponseEntity.ok(companyService.mapToDTO(created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody Company updatedCompany) {
-        Company company = companyService.updateCompany(id, updatedCompany);
-        if (company == null) {
+    public ResponseEntity<CompanyDTO> updateCompany(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
+        Company updated = companyService.updateCompany(id, companyService.mapToEntity(companyDTO));
+        if (updated != null) {
+            return ResponseEntity.ok(companyService.mapToDTO(updated));
+        } else {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(company);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
-        if (companyService.deleteCompany(id)) {
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse> deleteCompany(@PathVariable Long id) {
+        boolean deleted = companyService.deleteCompany(id);
+        if (deleted) {
+            return ResponseEntity.ok(new ApiResponse("Company deleted successfully", true));
+        } else {
+            return ResponseEntity.status(404).body(new ApiResponse("Company not found", false));
         }
-        return ResponseEntity.notFound().build();
     }
 }
