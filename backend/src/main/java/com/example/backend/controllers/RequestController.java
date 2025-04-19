@@ -1,9 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.dto.ApiResponse;
-import com.example.backend.dto.RequestDTO;
 import com.example.backend.services.RequestService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
