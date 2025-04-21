@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/service_section.css';
+import { useNavigate } from 'react-router-dom';
 
 const serviceData = [
   {
@@ -27,6 +28,10 @@ const serviceData = [
 const ServiceCard = ({ title, description, icon, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   
+  const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/service/${1}`);
+      };
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -36,7 +41,10 @@ const ServiceCard = ({ title, description, icon, index }) => {
   }, [index]);
 
   return (
-    <div className={`service-card ${isVisible ? 'visible' : ''}`}>
+    <div className={
+      `service-card ${isVisible ? 'visible' : ''}`
+      } onClick={handleClick} style={{ animationDelay: `${index * 0.1}s` }
+      }>
       <div className="service-icon">
         {icon === 'code' && <i className="fas fa-code"></i>}
         {icon === 'palette' && <i className="fas fa-palette"></i>}

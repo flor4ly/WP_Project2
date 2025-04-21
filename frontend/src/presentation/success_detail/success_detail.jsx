@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/success_detail.css';
 
 const SuccessDetail = () => {
+  
   return (
     <div className="web-dev-page">
       <section className="intro">
