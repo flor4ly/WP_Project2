@@ -1,4 +1,3 @@
-// HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import './home.css';
 
@@ -69,43 +68,41 @@ export default function HomePage() {
       <ServicesSection />
       
       <section className="projects-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Featured Projects</h2>
-            <p>Explore our latest innovations and success stories</p>
-          </div>
-          {loading ? (
-            <div className="loading-container">
-              <div className="loader"></div>
-              <p>Loading amazing projects...</p>
+  <div className="container">
+    <div className="section-header">
+      <h2>Featured Projects</h2>
+     
+    </div>
+    {loading ? (
+      <div className="loading-container">
+        <div className="loader"></div>
+        <p>Loading amazing projects...</p>
+      </div>
+    ) : (
+      <div className="project-grid" >
+        {projectImages.map((img, index) => (
+          <div
+            className="project-card"
+            key={index}
+            style={{"--card-index": index, opacity: 1, }}
+          >
+            <div className="card-image">
+              <img src={img} alt={`Project ${index + 1}`} />
             </div>
-          ) : (
-            <div className="project-grid">
-              {projectImages.map((img, index) => (
-                <div 
-                  className="project-card" 
-                  key={index}
-                  style={{opacity: 1, transform: 'translateY(0)'}}
-                >
-                  <div className="card-image">
-                    <img src={img} alt={`Project ${index + 1}`} />
-                  </div>
-                  <div className="card-overlay">
-                    <h3>Project {index + 1}</h3>
-                    <p>Innovative solution for modern challenges</p>
-                    <button className="view-project-btn">View Details</button>
-                  </div>
-                </div>
-              ))}
+            <div className="card-overlay">
+              <h3>Project {index + 1}</h3>
+              <p>Innovative solution for modern challenges</p>
+              <button className="view-project-btn">View Details</button>
             </div>
-          )}
-          
-          <div className="projects-cta">
-            <button className="btn outline-btn">See All Projects</button>
           </div>
-        </div>
-      </section>
-
+        ))}
+      </div>
+    )}
+    <div className="projects-cta">
+      <button className="btn outline-btn">See All Projects</button>
+    </div>
+  </div>
+</section>
       <CollaboratorsSection />
 
       <TestimonialsSection />

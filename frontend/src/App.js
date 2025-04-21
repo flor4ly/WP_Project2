@@ -7,8 +7,8 @@ import HomePage from './presentation/home/home_page';
 import PortfolioGrid from './presentation/projects/projects_page';
 import Footer from './presentation/home/widgets/footer';
 import Appbar from './presentation/home/widgets/appbar';
-import Careers from './presentation/careers/careers_page.jsx';
-import Services from './presentation/servies/services.jsx';
+import ServicesSection from './presentation/home/widgets/service_section.jsx';
+import ProjectDetailPage from './presentation/project_detail/project_detail.jsx';
 
 
 function App() {
@@ -18,7 +18,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<PortfolioGrid projects= {projects}/>} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/services" element={<ServicesSection />} />
+        <Route path="/project/:id" element={<ProjectDetailPage />} />
+
       </Routes>
       <Footer />
     </Router>

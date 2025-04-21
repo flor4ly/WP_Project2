@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import './styles/servies.css';
+import './styles/project_detail.css';
 
 
 
-const Services = () => {
+const ProjectDetailPage = () => {
   const servicesRef = useRef(null);
 
   useEffect(() => {
@@ -86,4 +86,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default ProjectDetailPage;

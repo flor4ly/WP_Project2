@@ -1,10 +1,11 @@
-// components/ProjectCard.jsx
 import React, { useState } from 'react';
 import '../styles/project_card.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProjectCard = ({ project, size }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+  const navigate = useNavigate();
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -13,11 +14,15 @@ const ProjectCard = ({ project, size }) => {
     setIsHovered(false);
   };
   
+  const handleClick = () => {
+    navigate(`/project/${project.id}`);
+  };
   return (
     <div 
       className={`project-card ${size}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <div className="card-image-container">
         <img 
