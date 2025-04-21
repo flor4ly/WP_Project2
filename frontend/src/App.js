@@ -9,6 +9,7 @@ import Footer from './presentation/home/widgets/footer';
 import Appbar from './presentation/home/widgets/appbar';
 import ServicesSection from './presentation/home/widgets/service_section.jsx';
 import ProjectDetailPage from './presentation/project_detail/project_detail.jsx';
+import SuccessDetail from './presentation/success_detail/success_detail.jsx';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/projects" element={<PortfolioGrid projects= {projects}/>} />
         <Route path="/services" element={<ServicesSection />} />
         <Route path="/project/:id" element={<ProjectDetailPage />} />
+        <Route path="/service/:id" element={<SuccessDetail />} />
 
       </Routes>
       <Footer />
