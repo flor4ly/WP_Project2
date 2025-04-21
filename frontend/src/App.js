@@ -10,6 +10,9 @@ import Appbar from './presentation/home/widgets/appbar';
 import ServicesSection from './presentation/home/widgets/service_section.jsx';
 import ProjectDetailPage from './presentation/project_detail/project_detail.jsx';
 import SuccessDetail from './presentation/success_detail/success_detail.jsx';
+import About from './presentation/about/about.jsx';
+import Careers from './presentation/careers/careers_page.jsx';
+import CareerDetails from './presentation/careers_info/careers_details.jsx';
 
 
 function App() {
@@ -20,9 +23,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<PortfolioGrid projects= {projects}/>} />
         <Route path="/services" element={<ServicesSection />} />
+        <Route path="/careers" element={<Careers />} />
+
+        <Route path="/about" element={<About />} />
         <Route path="/project/:id" element={<ProjectDetailPage />} />
         <Route path="/service/:id" element={<SuccessDetail />} />
-
+        <Route path="/career-info/:id" element={<CareerDetails />} />
       </Routes>
       <Footer />
     </Router>

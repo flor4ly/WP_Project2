@@ -1,12 +1,11 @@
 import React from "react";
 import './styles/careers_details.css'
-import Appbar from "../home/widgets/appbar";
-import Footer from "../home/widgets/footer";
+
 
 const CareerDetails = () => {
   return (
     <div className="career-details-container">
-        <Appbar/>
+    
         <h1>Middle Frontend Developer</h1>
         <hr />
 
@@ -53,7 +52,7 @@ const CareerDetails = () => {
         </section>
 
         <button className="resume-button">Send Resume</button>
-        <Footer/>
+    
     </div>
   );
 };

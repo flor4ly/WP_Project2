@@ -113,7 +113,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <img src="/api/placeholder/400/320" alt="Team working on laptops" className="section-image" />
+              <img src='https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg' alt="Team working on laptops" className="section-image" />
             </motion.div>
           </div>
         </motion.div>
@@ -148,7 +148,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <img src="/api/placeholder/400/320" alt="Modern office space" className="section-image" />
+              <img src='https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg' alt="Modern office space" className="section-image" />
             </motion.div>
           </div>
         </motion.div>

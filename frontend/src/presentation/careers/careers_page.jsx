@@ -1,8 +1,7 @@
 import React from "react";
 import './styles/careers.css';
 import { Link } from "react-router-dom";
-import Appbar from "../home/widgets/appbar";
-import Footer from "../home/widgets/footer";
+import { useNavigate } from 'react-router-dom';
 
 export const jobList = new Array(9).fill({
   title: "Middle Frontend Developer",
@@ -11,13 +10,18 @@ export const jobList = new Array(9).fill({
   skills: "React + REST API + Tailwind CSS",
 });
 const Careers = () => {
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/career-info/${1}`);
+  };
   return (
     <div className="careers-container">
 
       <header className="header">
         <h1>CAREERS</h1>
       </header>
-      <section className="cards-section">
+      <section className="cards-section" onClick={handleClick}>
         {jobList.map((job, index) => (
           <Link to="/career-details" key={index} className="job-card-link">
             <div className="job-card">
