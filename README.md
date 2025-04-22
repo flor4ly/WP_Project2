@@ -1,37 +1,143 @@
-# WP_Project2
+# Full Stack Application - README
 
+This is a full-stack application built with **Spring Boot** for the backend and **React.js** for the frontend. The project is designed to provide a platform with project listings, services, job opportunities, and more. The application follows a modern software development approach with clean separation of frontend and backend logic.
 
-## 📌 Project Overview
-A full-stack web application using **Spring Boot** for the backend and **React.js** for the frontend.
+---
 
-## 🛠️ Tech Stack
-- Backend: Java, Spring Boot
-- Frontend: React.js
-- Database: (Specify later)
+## Overview
 
-## 🚀 Setup Instructions
-### 1️⃣ Clone the Repository
+This project consists of two main parts:
 
+1. **Backend (Spring Boot)**: A REST API serving data about projects, services, jobs, and client requests.
+2. **Frontend (React.js)**: A web interface that interacts with the backend API, providing users with a dynamic and responsive experience.
 
+---
+
+## Table of Contents
+
+- [Backend](#backend)
+  - [Repositories](#repositories)
+  - [Entities](#entities)
+  - [DTOs (Data Transfer Objects)](#dtos-data-transfer-objects)
+  - [Setup Instructions](#setup-instructions)
+  - [API Endpoints](#api-endpoints)
+- [Frontend](#frontend)
+  - [Getting Started](#getting-started)
+  - [Available Scripts](#available-scripts)
+  - [Directory Structure](#directory-structure)
+  - [Setup Instructions](#frontend-setup-instructions)
+- [Full Stack Integration](#full-stack-integration)
+- [Deployment](#deployment)
+- [Conclusion](#conclusion)
+
+---
+
+## Backend
+
+### Repositories
+The repositories provide an interface to the database. They extend Spring Data JPA interfaces to perform CRUD operations on the entities. Examples include:
+- **`ProjectRepository`**: Manages project data
+- **`ServicesRepository`**: Handles services data
+- **`JobsRepository`**: Manages job listings
+
+### Entities
+The entities represent the data model of the application. They are mapped to database tables using JPA annotations. Examples include:
+- **`Project`**: Represents a project
+- **`Services`**: Represents a service offered
+- **`Jobs`**: Represents a job listing
+- **`Request`**: Represents a client request
+- **`AboutUs`**: Represents about us information
+
+### DTOs (Data Transfer Objects)
+DTOs are used to transfer data between the client and server. They define the structure of the data that is sent to and received from the frontend. Examples include:
+- **`HomeDTO`**: Contains data for the home page
+- **`ProjectsDetailDTO`**: Contains detailed project information
+- **`ServicesDTO`**: Contains services information
+- **`JobsDTO`**: Contains job listing information
+
+### Setup Instructions
+
+#### 1. Clone the Repository
+```bash
 git clone https://github.com/flor4ly/WP_Project2.git
-cd WP_Project2
+cd WP_Project2/backend
+```
 
+#### 2. Set Up the Database
+The application uses PostgreSQL as its database. You can set it up using Docker Compose:
 
-# Backend Documentation
+```bash
+docker-compose up -d
+```
 
-🛠 Backend Documentation
-📖 Overview
-The backend of this application is built using Spring Boot, a robust Java framework. It provides RESTful APIs, processes business logic, and manages database integration. This layer acts as the backbone of the application, ensuring smooth and secure communication with the frontend.
+This will start a PostgreSQL database and pgAdmin (a PostgreSQL administration tool) in Docker containers.
 
-🏗 Setup Instructions
-Navigate to the backend directory:
-cd backend 
-Install dependencies:
+PostgreSQL will be available at localhost:5432
 
-mvn install
-Run the Spring Boot application:
+Database: myappdb
 
+Username: user
+
+Password: pass
+
+pgAdmin will be available at http://localhost:5050
+
+Email: admin@admin.com
+
+Password: admin
+
+#### 3. Build the Application
+Build the Spring Boot application using Maven:
+
+```bash
+mvn clean install
+```
+
+#### 4. Run the Application
+Start the Spring Boot application:
+
+```bash
 mvn spring-boot:run
-Verify that the backend is running at:
+```
 
-http://localhost:8080
+The application will start and be available at http://localhost:8080.
+
+### API Endpoints
+The backend provides the following API endpoints:
+
+- `/api/home`: Get home page data
+- `/api/about`: Get about us information
+- `/api/projects`: Get project listings
+- `/api/projects/{id}`: Get details of a specific project
+- `/api/services`: Get services information
+- `/api/services/{id}`: Get details of a specific service
+- `/api/jobs`: Get job listings
+- `/api/jobs/{id}`: Get details of a specific job
+- `/api/request`: Submit a client request
+
+## Frontend
+
+### Getting Started
+This project was bootstrapped with Create React App.
+
+### Available Scripts
+In the project directory, you can run:
+
+- `npm start`: Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
+- `npm test`: Launches the test runner in the interactive watch mode.
+- `npm run build`: Builds the app for production to the build folder.
+- `npm run eject`: Removes the single build dependency from your project and copies all configuration files into your project for full control.
+
+### Directory Structure
+Frontend Directory:
+
+Purpose: Contains React.js components and frontend code.
+
+Files:
+
+- `src/`: Main source code for the React application
+- `components/`: Reusable UI components
+- `pages/`: Page-level components (e.g., Home, Projects, Careers)
+- `services/`: Handles API calls to the backend
+- `styles/`: Contains CSS files for styling
+- `App.js`: Main React app file
