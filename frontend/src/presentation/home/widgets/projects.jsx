@@ -32,7 +32,7 @@ export default function ProjectsSection({ featuredProjects, loading }) {
   const navigate = useNavigate();
 
   const handleProjectClick = (id) => {
-    navigate(`/projects/${id}`);
+    navigate(`/projects`);
   };
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function ProjectsSection({ featuredProjects, loading }) {
           </div>
         )}
         <div className="projects-cta">
-          <button className="btn outline-btn">See All Projects</button>
+          <button className="btn outline-btn" onClick={handleProjectClick}>See All Projects</button>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import ServicesSection from './widgets/service_section';
 import CollaboratorsSection from './widgets/colloboraters';
 import TestimonialsSection from './widgets/user_feedback';
 import ProjectsSection from './widgets/projects';
+import { useNavigate } from 'react-router-dom';
 
 
 const defaultImage = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
@@ -17,6 +18,16 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleAboutClick = (id) => {
+    navigate(`/about`);
+  };
+
+
+  const handleApplyClick = (id) => {
+    navigate(`/services`);
+  };
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
 
@@ -30,7 +41,6 @@ export default function HomePage() {
         setHomeData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Keep the default empty arrays to trigger fallback in ProjectsSection
       } finally {
         setLoading(false);
       }
@@ -57,8 +67,8 @@ export default function HomePage() {
               </p>
               <p className="tagline">Efficient. Scalable. Secure.</p>
               <div className="button-group">
-                <button className="btn primary-btn">Get Started</button>
-                <button className="btn secondary-btn">Learn More</button>
+                <button className="btn primary-btn" onClick={handleApplyClick}>Get Started</button>
+                <button className="btn secondary-btn" onClick={handleAboutClick}>Learn More</button>
               </div>
             </div>
             <div className="hero-img">
