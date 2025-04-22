@@ -1,0 +1,154 @@
+.navbar {
+  background-color: #133a5c;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+  padding: 0.5rem 2rem;
+  background-color: rgba(19, 58, 92, 0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.4rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  margin-right: 1.5rem;
+}
+
+.nav-link {
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  color: #a0cfff;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #a0cfff;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.lang-switch {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.globe-icon {
+  margin-right: 5px;
+}
+
+.lang-switch:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-link {
+  animation: slideIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.nav-link:nth-child(1) { animation-delay: 0.1s; }
+.nav-link:nth-child(2) { animation-delay: 0.2s; }
+.nav-link:nth-child(3) { animation-delay: 0.3s; }
+.nav-link:nth-child(4) { animation-delay: 0.4s; }
+.nav-link:nth-child(5) { animation-delay: 0.5s; }
+
+.lang-switch {
+  animation: slideIn 0.5s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .navbar .logo {
+    margin-bottom: 1rem;
+  }
+  
+  .right-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .nav-links {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-right: 1rem;
+  }
+  
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .nav-link {
+    margin: 0 0.5rem;
+  }
+}
