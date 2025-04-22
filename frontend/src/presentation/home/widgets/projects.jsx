@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/projects_section.css';
+import { useNavigate } from 'react-router-dom';
+
 
 // Sample projects data in case API doesn't return any
 const sampleProjects = [
@@ -26,6 +28,12 @@ const sampleProjects = [
 export default function ProjectsSection({ featuredProjects, loading }) {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(loading);
+
+  const navigate = useNavigate();
+
+  const handleProjectClick = (id) => {
+    navigate(`/projects/${id}`);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -73,7 +81,7 @@ export default function ProjectsSection({ featuredProjects, loading }) {
                   <div className="card-overlay">
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
-                    <button className="view-project-btn">View Details</button>
+                    <button className="view-project-btn" onClick={handleProjectClick(project.id)}>View Details</button>
                   </div>
                 </div>
               ))

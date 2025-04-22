@@ -38,25 +38,24 @@ const ServiceCard = ({ title, description, icon, index }) => {
     </div>
   );
 };
-
-export default function ServicesSection({ services }) {
+export default function ServicesSection({ services = [] }) {
   const [isVisible, setIsVisible] = useState(false);
-
+  
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setIsVisible(true);
       }
     }, { threshold: 0.1 });
-
+    
     const section = document.querySelector('.services-section');
     if (section) observer.observe(section);
-
+    
     return () => {
       if (section) observer.unobserve(section);
     };
   }, []);
-
+  
   return (
     <section className={`services-section ${isVisible ? 'visible' : ''}`}>
       <div className="container">
@@ -64,9 +63,8 @@ export default function ServicesSection({ services }) {
           <h2>Services</h2>
           <p>Comprehensive technology solutions for your business needs</p>
         </div>
-
         <div className="services-grid">
-          {services.map((service, index) => (
+          {services && services.map((service, index) => (
             <ServiceCard
               key={index}
               title={service.title}
