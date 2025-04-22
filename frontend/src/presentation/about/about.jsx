@@ -4,9 +4,41 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsVisible(true);
+    const fetchAboutData = async () => {
+      try {
+        const apiUrl = process.env.NODE_ENV === 'development' 
+          ? 'http://localhost:8080/api/about-us/1' 
+          : '/api/about-us/1';
+          
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors'
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server responded with ${response.status}`);
+        }
+
+        const data = await response.json();
+        setAboutData(data);
+        setIsVisible(true);
+      } catch (err) {
+        console.error('Full error details:', err);
+        setError(`Failed to load data. ${err.message}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAboutData();
   }, []);
 
   const fadeIn = {
@@ -14,12 +46,33 @@ const About = () => {
     visible: { opacity: 1, y: 0 }
   };
 
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loader"></div>
+      <p>Loading about data...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="error-container">
+      <h3>Error loading data</h3>
+      <p>{error}</p>
+      <p>Please try again later or contact support.</p>
+    </div>
+  );
+
+  if (!aboutData) return <div>No data available</div>;
+
+  // Prepare stats data from API response
   const statsData = [
-    { number: '100+', label: 'Complete Projects' },
-    { number: '50+', label: 'Team Members' },
-    { number: '200+', label: 'Client Reviews' },
-    { number: '10+', label: 'Winning Awards' }
+    { number: `${aboutData.num_projects}+`, label: 'Complete Projects' },
+    { number: `${aboutData.num_members}+`, label: 'Team Members' },
+    { number: `${aboutData.num_reviews}+`, label: 'Client Reviews' },
+    { number: `${aboutData.num_awards}+`, label: 'Winning Awards' }
   ];
+
+  // Get first image URL if available
+  const firstImage = aboutData.img_urls?.split(',')[0] || 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
 
   return (
     <div className="about-container">
@@ -52,11 +105,7 @@ const About = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <motion.p className="company-description">
-          Our Company, TechInnovate did this and that. Consectetur
-          adipiscing elit. Curabitur semper, sapien sed varius placerat, leo
-          tincidunt odio, eu fermentum purus nunc sit amet elit. Aenean
-          posuere, tortor nec hendrerit interdum, mauris metus pharetra
-          ligula, vel ullamcorper nulla eros a urna.
+          {aboutData.description}
         </motion.p>
 
         <div className="stats-container">
@@ -101,9 +150,7 @@ const About = () => {
             >
               <h2 className="section-title">Our Vision</h2>
               <p className="section-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta dapibus quam
-                tristique volutpat. Nam vel lorem dapibus ligula efficitur posuere. Nam a congue
-                felis. Etiam a eleifend dui.
+                {aboutData.our_vision}
               </p>
             </motion.div>
             <motion.div 
@@ -113,7 +160,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <img src='https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg' alt="Team working on laptops" className="section-image" />
+              <img src={firstImage} alt="Team working on laptops" className="section-image" />
             </motion.div>
           </div>
         </motion.div>
@@ -136,9 +183,7 @@ const About = () => {
             >
               <h2 className="section-title">Our Mission</h2>
               <p className="section-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta dapibus quam
-                tristique volutpat. Nam vel lorem dapibus ligula efficitur posuere. Nam a congue
-                felis. Etiam a eleifend dui.
+                {aboutData.our_mission}
               </p>
             </motion.div>
             <motion.div 
@@ -148,7 +193,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <img src='https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg' alt="Modern office space" className="section-image" />
+              <img src={firstImage} alt="Modern office space" className="section-image" />
             </motion.div>
           </div>
         </motion.div>
