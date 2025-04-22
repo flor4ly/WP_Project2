@@ -10,16 +10,30 @@ const CareerDetails = () => {
     applicant_phone: ''
   });
   const [resumeFile, setResumeFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchCareer = async () => {
       try {
         const response = await fetch(`http://localhost:8080/api/jobs/detail/${id}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
-        setCareer(data);
+        
+        // Convert strings to arrays if needed
+        const parsedData = {
+          ...data,
+          requirements: data.reqs?.split(';') || [],
+          skills: data.skills?.split(';') || [],
+          conditions: data.conditions?.split(';') || []
+        };
+
+        setCareer(parsedData);
       } catch (error) {
         console.error('Failed to fetch career details:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -62,7 +76,13 @@ const CareerDetails = () => {
     }
   };
 
-  if (!career) return <p>Loading career details...</p>;
+  if (isLoading) {
+    return <p>Loading career details...</p>; // Show loading message until data is fetched
+  }
+
+  if (!career) {
+    return <p>Failed to load career details. Please try again later.</p>;
+  }
 
   return (
     <div className="career-details-container">
@@ -71,7 +91,6 @@ const CareerDetails = () => {
 
       <section>
         <h2>Requirements</h2>
-        {/* Check if career.requirements exists before calling .map */}
         {Array.isArray(career.requirements) && career.requirements.length > 0 ? (
           <ul>
             {career.requirements.map((req, idx) => (
@@ -85,7 +104,6 @@ const CareerDetails = () => {
 
       <section>
         <h2>Required Knowledge & Skills</h2>
-        {/* Check if career.skills is an array before calling .map */}
         {Array.isArray(career.skills) && career.skills.length > 0 ? (
           <ul>
             {career.skills.map((skill, idx) => (
@@ -99,7 +117,6 @@ const CareerDetails = () => {
 
       <section>
         <h2>Working Conditions</h2>
-        {/* Check if career.conditions is an array before calling .map */}
         {Array.isArray(career.conditions) && career.conditions.length > 0 ? (
           <ul>
             {career.conditions.map((cond, idx) => (

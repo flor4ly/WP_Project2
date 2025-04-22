@@ -1,5 +1,5 @@
 .career-details-container {
-  background-color: #0f3b46;
+  background-color: #1a3547; /* Dark background for the container */
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 3rem 5rem;
@@ -15,12 +15,12 @@
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
-  color: #e0f7fa;
+  color: #a3d5ff; /* Light blue for titles */
 }
 
 .career-details-container hr {
   border: none;
-  border-top: 2px solid #4c7d8c;
+  border-top: 2px solid #2d5c7f; /* Blue tone border */
   width: 50%;
   margin-bottom: 2rem;
 }
@@ -28,19 +28,21 @@
 .career-details-container h2 {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  color: #e0f7fa;
+  color: #a3d5ff;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center; /* Centered the text */
 }
 
 .career-details-container ul {
-  list-style: disc;
-  padding-left: 1.5rem;
+  list-style: none; /* Remove bullet points */
+  padding-left: 0;
   line-height: 1.7;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+  text-align: center; /* Centered the list items */
 }
 
 .career-details-container ul li {
@@ -49,7 +51,7 @@
 }
 
 .application-form-section {
-  background-color: #1a535c;
+  background-color: #2d5c7f; /* Lighter blue for form section */
   border-radius: 8px;
   padding: 2rem;
   width: 100%;
@@ -59,9 +61,9 @@
 }
 
 .application-form-section h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #e0f7fa;
+  color: #a3d5ff;
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -70,9 +72,9 @@
   width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid #4c7d8c;
+  border: 1px solid #2d5c7f; /* Border color using blue */
   border-radius: 5px;
-  background-color: #1c3d46;
+  background-color: #1a3547; /* Darker background for inputs */
   color: white;
   font-size: 1rem;
   outline: none;
@@ -80,34 +82,56 @@
 }
 
 .application-form input:focus {
-  border-color: #53bbd5;
+  border-color: #a3d5ff; /* Light blue when focused */
 }
 
 .application-form input[type="file"] {
   padding: 0.75rem;
-  background-color: #1c3d46;
-  border: 1px solid #4c7d8c;
+  background-color: #1a3547;
+  border: 1px solid #2d5c7f;
 }
+
 .resume-button {
-  background-color: #53bbd5; /* Keep the original blue tone */
+  background-color: #a3d5ff; /* Light blue button color */
   color: white;
   border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
+  padding: 1rem 2rem; /* Larger padding for a more substantial look */
+  font-size: 1.2rem; /* Slightly larger font for the button */
   margin-top: 1.5rem;
-  border-radius: 6px;
+  border-radius: 50px; /* Rounded corners for a sleek, modern look */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-  width: 100%; /* Make it a full-width button */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+  width: 100%;
+  max-width: 250px; /* Limit button width to a reasonable size */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  text-align: center;
 }
 
 .resume-button:hover {
-  background-color: #3aa4bb; /* Darker hover effect */
-  transform: scale(1.05); /* Slight scale effect on hover */
+  background-color: #2d5c7f; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scale effect */
 }
 
 .resume-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #4c7d8c; /* Focus state with a colored outline */
+  box-shadow: 0 0 0 2px #2d5c7f; /* Focus state with a blue outline */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .career-details-container {
+    padding: 2rem;
+  }
+  
+  .career-details-container h1 {
+    font-size: 2rem;
+  }
+  
+  .career-details-container h2 {
+    font-size: 1.2rem;
+  }
+  
+  .application-form-section {
+    width: 90%;
+  }
 }
