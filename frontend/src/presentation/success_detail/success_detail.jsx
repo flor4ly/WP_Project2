@@ -1,12 +1,13 @@
 
 import './styles/success_detail.css';
 import TestimonialsSection from '../home/widgets/user_feedback';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-
+import { useParams } from 'react-router-dom';
+import ProjectsSection from '../home/widgets/projects';
 
 const SuccessDetail = () => {
-
+  const { id } = useParams(); 
   const [formData, setFormData] = useState({
     companyName: "",
     name: "",
@@ -14,12 +15,39 @@ const SuccessDetail = () => {
     description: "",
     serviceId: "1", // default to first service
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const serviceOptions = [
     { id: 1, label: "Web Development" },
     { id: 2, label: "Mobile Development" },
     { id: 3, label: "Branding" },
   ];
+
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:8080/api/services/${id}/projects`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("Fetched projects:", data); // Debug log to verify data
+        setProjects(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching projects:", err);
+        setError("Failed to load projects. Please try again later.");
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,24 +107,10 @@ const SuccessDetail = () => {
         </p>
       </section>
 
-      <section className="process">
-        <h3>Our Web Development Process</h3>
-        <div className="process-steps">
-          {[
-            { title: 'Consult & Discovery', desc: 'Understand your needs, goals, and audience.', icon: '🔍' },
-            { title: 'Design & Wireframe', desc: 'Create visual structures and review designs.', icon: '🛠️' },
-            { title: 'Development', desc: 'Build your site with modern technologies.', icon: '💻' },
-            { title: 'Test & Optimize', desc: 'Test for performance and cross-device compatibility.', icon: '🧪' },
-            { title: 'Launch & Support', desc: 'Launch the site and provide ongoing maintenance.', icon: '🚀' },
-          ].map((step, index) => (
-            <div key={index} className="step">
-              <div className="icon">{step.icon}</div>
-              <h4>{index + 1}. {step.title}</h4>
-              <p>{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ProjectsSection 
+        featuredProjects={projects} 
+        loading={loading} 
+      />
 
       <TestimonialsSection/>
 

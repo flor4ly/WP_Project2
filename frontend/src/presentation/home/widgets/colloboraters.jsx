@@ -1,5 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './styles/colloboraters.css';
+import { 
+  FaInstagram, 
+  FaYoutube, 
+  FaComment, 
+  FaTwitter, 
+  FaWhatsapp, 
+  FaTiktok, 
+  FaPlay, 
+  FaLinkedin 
+} from 'react-icons/fa';
+
+// Icon mapping object
+const iconMap = {
+  instagram: FaInstagram,
+  youtube: FaYoutube,
+  comment: FaComment,
+  twitter: FaTwitter,
+  whatsapp: FaWhatsapp,
+  tiktok: FaTiktok,
+  play: FaPlay,
+  linkedin: FaLinkedin
+};
 
 const collaborators = [
   { name: "Instagram", icon: "instagram", color: "#E1306C" },
@@ -14,19 +36,19 @@ const collaborators = [
 
 const CollaboratorIcon = ({ name, icon, color, delay }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const IconComponent = iconMap[icon];
   
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, delay);
-    
     return () => clearTimeout(timer);
   }, [delay]);
-
+  
   return (
     <div className={`collaborator-icon ${isVisible ? 'visible' : ''}`}>
       <div className="icon-container" style={{ '--accent-color': color }}>
-        <i className={`fab fa-${icon}`}></i>
+        <IconComponent size={24} color={color} />
       </div>
       <p>{name}</p>
     </div>
@@ -50,7 +72,7 @@ export default function CollaboratorsSection() {
       if (section) observer.unobserve(section);
     };
   }, []);
-
+  
   return (
     <section className={`collaborators-section ${isVisible ? 'visible' : ''}`}>
       <div className="container">
@@ -58,7 +80,6 @@ export default function CollaboratorsSection() {
           <h2>Collaborators</h2>
           <p>Trusted by industry leaders and innovative brands</p>
         </div>
-        
         <div className="collaborators-grid">
           {collaborators.map((collaborator, index) => (
             <CollaboratorIcon
