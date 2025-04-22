@@ -81,7 +81,7 @@ export default function ProjectsSection({ featuredProjects, loading }) {
                   <div className="card-overlay">
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
-                    <button className="view-project-btn" onClick={handleProjectClick(project.id)}>View Details</button>
+                    <button className="view-project-btn" >View Details</button>
                   </div>
                 </div>
               ))
