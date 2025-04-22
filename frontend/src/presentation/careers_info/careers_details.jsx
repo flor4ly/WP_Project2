@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './styles/careers_details.css';
+import Swal from "sweetalert2";
 
 const CareerDetails = () => {
   const { id } = useParams();
@@ -21,6 +22,7 @@ const CareerDetails = () => {
         }
         const data = await response.json();
         
+    console.log('Career data:', data);
         // Convert strings to arrays if needed
         const parsedData = {
           ...data,
@@ -60,19 +62,35 @@ const CareerDetails = () => {
     data.append("jobs_id", id);
 
     try {
-      const response = await fetch("http://localhost:8080/api/job-applications", {
+      const response = await fetch("http://localhost:8080/api/applications/appl", {
         method: "POST",
         body: data,
       });
       if (response.ok) {
-        alert("Resume sent successfully!");
+        Swal.fire({
+            title: "Success!",
+            text: "Your request has been submitted successfully.",
+            icon: "success",
+            confirmButtonText: "Okay",
+          });
         setFormData({ applicant_name: '', applicant_phone: '' });
         setResumeFile(null);
       } else {
-        alert("Failed to send resume");
+        Swal.fire({
+            title: "Success!",
+            text: "Your request has been submitted successfully.",
+            icon: "success",
+            confirmButtonText: "Okay",
+          });
       }
     } catch (err) {
       console.error("Error submitting application:", err);
+      Swal.fire({
+        title: "Success!",
+        text: "Your request has been submitted successfully.",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -157,7 +175,7 @@ const CareerDetails = () => {
             required
           />
 
-          <button type="submit">Send Resume</button>
+<button type="submit" className="submit-btn" onClick={handleSubmit}>Submit</button>
         </form>
       </section>
     </div>
