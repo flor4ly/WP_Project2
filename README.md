@@ -1,6 +1,6 @@
-# Full Stack Application - README
+# Softylink - README
 
-This is a full-stack application built with **Spring Boot** for the backend and **React.js** for the frontend. The project is designed to provide a platform with project listings, services, job opportunities, and more. The application follows a modern software development approach with clean separation of frontend and backend logic.
+This is a full-stack website built with **Spring Boot** for the backend and **React.js** for the frontend. The project is designed to provide a platform with project listings, services, job opportunities, and more. The application follows a modern software development approach with clean separation of frontend and backend logic.
 
 ---
 
@@ -124,9 +124,6 @@ This project was bootstrapped with Create React App.
 In the project directory, you can run:
 
 - `npm start`: Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
-- `npm test`: Launches the test runner in the interactive watch mode.
-- `npm run build`: Builds the app for production to the build folder.
-- `npm run eject`: Removes the single build dependency from your project and copies all configuration files into your project for full control.
 
 ### Directory Structure
 Frontend Directory:
@@ -141,3 +138,34 @@ Files:
 - `services/`: Handles API calls to the backend
 - `styles/`: Contains CSS files for styling
 - `App.js`: Main React app file
+
+
+## Full Stack Integration
+
+The frontend communicates with the backend through API requests. The React app makes HTTP requests to the Spring Boot API to fetch and display data.
+
+### API Requests:
+- `GET /api/home`: Fetches home page data
+- `GET /api/projects`: Fetches list of projects
+- `GET /api/services`: Fetches list of services
+- `GET /api/jobs`: Fetches list of job listings
+
+The frontend uses Axios for making API requests.
+
+## Deployment
+
+For full-stack deployment, you can deploy the frontend and backend separately or together using Docker Compose.
+
+### Docker Compose Setup
+
+```bash
+docker-compose up -d
+```
+
+This will start both the backend (Spring Boot) and frontend (React.js) in Docker containers.
+
+## Conclusion
+
+This repository contains a full-stack website with a backend built using Spring Boot and a frontend built using React.js. It provides a platform for managing projects, services, jobs, and more. You can set up and run the application locally for development, testing, and production purposes.
+
+For any issues or questions, feel free to reach out to the maintainers or create an issue on the GitHub repository.
