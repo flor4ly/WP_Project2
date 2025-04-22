@@ -118,7 +118,7 @@ export default function HomePage() {
       </section>
 
       <CollaboratorsSection />
-      <TestimonialsSection />
+      <TestimonialsSection jobListings={homeData.jobListings} />
     </div>
   );
 }
