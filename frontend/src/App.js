@@ -13,6 +13,7 @@ import SuccessDetail from './presentation/success_detail/success_detail.jsx';
 import About from './presentation/about/about.jsx';
 import Careers from './presentation/careers/careers_page.jsx';
 import CareerDetails from './presentation/careers_info/careers_details.jsx';
+import ServicesPage from './presentation/services_page/services_page.jsx';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<PortfolioGrid projects= {projects}/>} />
-        <Route path="/services" element={<ServicesSection />} />
+        <Route path="/services" element={<ServicesPage />} />
         <Route path="/careers" element={<Careers />} />
 
         <Route path="/about" element={<About />} />
