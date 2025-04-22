@@ -1,24 +1,23 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.ServicesDetailDTO;
-import com.example.backend.services.ServicesDetailService;
+import com.example.backend.dto.ProjectsDetailDTO;
+import com.example.backend.services.ProjectsDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services-detail")
+@RequestMapping("/api/services")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ServicesDetailController {
 
-    private final ServicesDetailService servicesDetailService;
+    private final ProjectsDetailService projectsDetailService;
 
-    @GetMapping
-    public ServicesDetailDTO getServicesDetail(
-            @RequestParam List<Long> serviceIds,
-            @RequestParam List<Long> projectIds) {
-        return servicesDetailService.getServicesDetailByIds(serviceIds, projectIds);
+    // GET /api/services/{id}/projects
+    @GetMapping("/{id}/projects")
+    public List<ProjectsDetailDTO> getProjectsByServiceId(@PathVariable Long id) {
+        return projectsDetailService.getProjectsByServiceId(id);
     }
-
 }

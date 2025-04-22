@@ -36,6 +36,18 @@ public class ProjectsDetailService {
         return new ProjectsDetailDTO(project);
     }
 
+    public List<ProjectsDetailDTO> getProjectsByServiceId(Long serviceId) {
+        return projectRepository.findByServicesId(serviceId).stream()
+                .map(project -> {
+                    ProjectsDetailDTO dto = new ProjectsDetailDTO();
+                    dto.setTitle(project.getTitle());
+                    dto.setDescription(project.getDescription());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
+
     @Transactional
     public void deleteProject(Long id) {
         if (!projectRepository.existsById(id)) {
