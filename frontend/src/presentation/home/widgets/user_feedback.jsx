@@ -1,4 +1,3 @@
-// TestimonialsSection.jsx
 import React, { useState, useEffect } from 'react';
 import './styles/user_feedback.css';
 
@@ -44,12 +43,12 @@ const testimonials = [
 
 const TestimonialCard = ({ testimonial, index }) => {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100 + index * 150);
-    
+
     return () => clearTimeout(timer);
   }, [index]);
 
@@ -66,20 +65,19 @@ const TestimonialCard = ({ testimonial, index }) => {
   );
 };
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ jobListings }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setIsVisible(true);
       }
     }, { threshold: 0.1 });
-    
+
     const section = document.querySelector('.testimonials-section');
     if (section) observer.observe(section);
-    
+
     return () => {
       if (section) observer.unobserve(section);
     };
@@ -92,27 +90,33 @@ export default function TestimonialsSection() {
           <h2>Client Reviews</h2>
           <p>What our clients say about our work</p>
         </div>
-        
+
         <div className="testimonials-grid">
           {testimonials.map((testimonial, index) => (
-            <TestimonialCard 
+            <TestimonialCard
               key={index}
               testimonial={testimonial}
               index={index}
             />
           ))}
         </div>
-        
+
         <div className="jobs-cta">
           <h3>Wanna be a part of something big?</h3>
           <p>Show your skills and join our team</p>
-          
+
           <div className="job-positions">
-            <span className="job-position">Middle Frontend Developer</span>
-            <span className="job-position">Middle Backend Developer</span>
-            <span className="job-position">Middle UI\UX Designer</span>
+            {jobListings?.length > 0 ? (
+              jobListings.map((job) => (
+                <span className="job-position" key={job.id}>
+                  {job.title}
+                </span>
+              ))
+            ) : (
+              <span className="job-position">No openings currently</span>
+            )}
           </div>
-          
+
           <button className="btn outline-btn">Learn More</button>
         </div>
       </div>
