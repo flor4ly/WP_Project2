@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './styles/projects.css';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_IMAGE = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
 
@@ -22,6 +23,13 @@ const ProjectsPage = () => {
       });
   }, []);
 
+
+  const navigate = useNavigate();
+
+  const handleDetailClick = (id) => {
+    console.log('Project ID:', id);
+    navigate(`/project/${id}`);
+  };
   return (
     <div className="projects-container">
       <h1 className="page-title">Our Projects</h1>
@@ -37,6 +45,7 @@ const ProjectsPage = () => {
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              onClick={() => handleDetailClick(project.id)}
               transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               <div className="thumbnail-wrapper">
@@ -54,16 +63,16 @@ const ProjectsPage = () => {
                   <img src={project.logo || DEFAULT_IMAGE} alt="Logo" className="project-logo" onError={(e) => {
                   e.target.src = DEFAULT_IMAGE;
                 }} />
-                  <h2>{project.title}</h2>
+                  <h2>{project.title || "Karman-ai"}</h2>
                 </div>
-                <p>{project.description}</p>
+                <p>{project.description || "here should be description"}</p>
                 <a
-                  href={project.link_to_website}
+                 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="visit-btn"
                 >
-                  Visit Website
+                  View details
                 </a>
               </div>
             </motion.div>

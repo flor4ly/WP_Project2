@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { projects } from './presentation/projects/widgets/project_card.jsx';
-
 import HomePage from './presentation/home/home_page';
-import PortfolioGrid from './presentation/projects/projects_page';
 import Footer from './presentation/home/widgets/footer';
 import Appbar from './presentation/home/widgets/appbar';
-import ServicesSection from './presentation/home/widgets/service_section.jsx';
 import ProjectDetailPage from './presentation/project_detail/project_detail.jsx';
 import SuccessDetail from './presentation/success_detail/success_detail.jsx';
 import About from './presentation/about/about.jsx';
@@ -23,7 +19,7 @@ function App() {
       <Appbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage/>} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/careers" element={<Careers />} />
 
