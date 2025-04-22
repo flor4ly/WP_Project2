@@ -1,4 +1,4 @@
-# Softylink - README
+# Softlynk - README
 
 This is a full-stack website built with **Spring Boot** for the backend and **React.js** for the frontend. The project is designed to provide a platform with project listings, services, job opportunities, and more. The application follows a modern software development approach with clean separation of frontend and backend logic.
 
