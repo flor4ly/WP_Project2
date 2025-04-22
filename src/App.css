@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #282c34;
+  color: white;
+}
+
+.app-logo {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
