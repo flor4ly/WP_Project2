@@ -1,41 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import './home.css';
-
 import ServicesSection from './widgets/service_section';
 import CollaboratorsSection from './widgets/colloboraters';
 import TestimonialsSection from './widgets/user_feedback';
 
-
-
 const defaultImage = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
 
 export default function HomePage() {
-  const [projectImages, setProjectImages] = useState([]);
+  const [homeData, setHomeData] = useState({
+    featuredProjects: [],
+    featuredServices: [],
+    jobListings: []
+  });
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
-    
-    // Simulate fetch with better project images
-    setTimeout(() => {
-      setProjectImages([
-        'https://placehold.co/600x400/3498db/ffffff?text=Development',
-        'https://placehold.co/600x400/9b59b6/ffffff?text=Security',
-        'https://placehold.co/600x400/2ecc71/ffffff?text=DevOps',
-        'https://placehold.co/600x400/e74c3c/ffffff?text=Analytics',
-        'https://placehold.co/600x400/f39c12/ffffff?text=UI/UX',
-        'https://placehold.co/600x400/1abc9c/ffffff?text=Cloud',
-      ]);
-      setLoading(false);
-      
-    }, 1000);
+
+    const fetchHomeData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/home');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setHomeData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setHomeData({
+          featuredProjects: [],
+          featuredServices: [],
+          jobListings: []
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHomeData();
   }, []);
 
   return (
     <div className={`homepage ${isVisible ? 'visible' : ''}`}>
-  
-      
       <section className="hero">
         <div className="container">
           <div className="hero-content">
@@ -64,49 +71,54 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
-      <ServicesSection />
-      
-      <section className="projects-section">
-  <div className="container">
-    <div className="section-header">
-      <h2>Featured Projects</h2>
-     
-    </div>
-    {loading ? (
-      <div className="loading-container">
-        <div className="loader"></div>
-        <p>Loading amazing projects...</p>
-      </div>
-    ) : (
-      <div className="project-grid" >
-        {projectImages.map((img, index) => (
-          <div
-            className="project-card"
-            key={index}
-            style={{"--card-index": index, opacity: 1, }}
-          >
-            <div className="card-image">
-              <img src={img} alt={`Project ${index + 1}`} />
-            </div>
-            <div className="card-overlay">
-              <h3>Project {index + 1}</h3>
-              <p>Innovative solution for modern challenges</p>
-              <button className="view-project-btn">View Details</button>
-            </div>
-          </div>
-        ))}
-      </div>
-    )}
-    <div className="projects-cta">
-      <button className="btn outline-btn">See All Projects</button>
-    </div>
-  </div>
-</section>
-      <CollaboratorsSection />
 
+      <ServicesSection services={homeData.featuredServices} />
+
+      <section className="projects-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Featured Projects</h2>
+          </div>
+          {loading ? (
+            <div className="loading-container">
+              <div className="loader"></div>
+              <p>Loading amazing projects...</p>
+            </div>
+          ) : (
+            <div className="project-grid">
+              {homeData.featuredProjects.length === 0 ? (
+                <p>No featured projects available.</p>
+              ) : (
+                homeData.featuredProjects.map((project, index) => (
+                  <div
+                    className="project-card"
+                    key={project.id || index}
+                    style={{ "--card-index": index, opacity: 1 }}
+                  >
+                    <div className="card-image">
+                      <img
+                        src={project.thumbnail || `https://placehold.co/600x400?text=${project.title}`}
+                        alt={project.title}
+                      />
+                    </div>
+                    <div className="card-overlay">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                      <button className="view-project-btn">View Details</button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+          <div className="projects-cta">
+            <button className="btn outline-btn">See All Projects</button>
+          </div>
+        </div>
+      </section>
+
+      <CollaboratorsSection />
       <TestimonialsSection />
-  
     </div>
   );
 }
