@@ -3,6 +3,8 @@ import './home.css';
 import ServicesSection from './widgets/service_section';
 import CollaboratorsSection from './widgets/colloboraters';
 import TestimonialsSection from './widgets/user_feedback';
+import ProjectsSection from './widgets/projects';
+
 
 const defaultImage = 'https://royaltx.org/wp-content/uploads/2023/12/60612053_m-scaled.jpg';
 
@@ -28,11 +30,7 @@ export default function HomePage() {
         setHomeData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setHomeData({
-          featuredProjects: [],
-          featuredServices: [],
-          jobListings: []
-        });
+        // Keep the default empty arrays to trigger fallback in ProjectsSection
       } finally {
         setLoading(false);
       }
@@ -73,49 +71,11 @@ export default function HomePage() {
       </section>
 
       <ServicesSection services={homeData.featuredServices} />
-
-      <section className="projects-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Featured Projects</h2>
-          </div>
-          {loading ? (
-            <div className="loading-container">
-              <div className="loader"></div>
-              <p>Loading amazing projects...</p>
-            </div>
-          ) : (
-            <div className="project-grid">
-              {homeData.featuredProjects.length === 0 ? (
-                <p>No featured projects available.</p>
-              ) : (
-                homeData.featuredProjects.map((project, index) => (
-                  <div
-                    className="project-card"
-                    key={project.id || index}
-                    style={{ "--card-index": index, opacity: 1 }}
-                  >
-                    <div className="card-image">
-                      <img
-                        src={project.thumbnail || `https://placehold.co/600x400?text=${project.title}`}
-                        alt={project.title}
-                      />
-                    </div>
-                    <div className="card-overlay">
-                      <h3>{project.title}</h3>
-                      <p>{project.description}</p>
-                      <button className="view-project-btn">View Details</button>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-          <div className="projects-cta">
-            <button className="btn outline-btn">See All Projects</button>
-          </div>
-        </div>
-      </section>
+      
+      <ProjectsSection 
+        featuredProjects={homeData.featuredProjects} 
+        loading={loading} 
+      />
 
       <CollaboratorsSection />
       <TestimonialsSection jobListings={homeData.jobListings} />
