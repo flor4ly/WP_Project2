@@ -103,6 +103,8 @@ export const projects = [
       category: "Branding",
       size: "medium"
     },
+
+    
     {
       id: 8,
       title: "Data Dashboard",
